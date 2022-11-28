@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 import Axios from 'axios'
 
@@ -8,10 +7,10 @@ function App() {
   const baseUrl = "http://localhost:3000"
 
   const [values, setValues] = useState();
-  const [professores, setProfessores] = useState([])
-  const [materias, setMaterias] = useState([])
-  const [turmas, setTurmas] = useState([])
-  const [agendamentos, setAgendamentos] = useState([])
+  let [professores, setProfessores] = useState([])
+  let [materias, setMaterias] = useState([])
+  let [turmas, setTurmas] = useState([])
+  let [agendamentos, setAgendamentos] = useState([])
 
   const handleChangeValues = (value) => {
     setValues((prevValue) => ({
@@ -21,25 +20,26 @@ function App() {
   }
 
   const handleClickButton = () => {
-    Axios.post(`${baseUrl}/cadastrarProfessores`, {
+    Axios.post(`${baseUrl}/cadastro/professor`, {
       Nome: values.Nome,
       Email: values.Email,
     }).then((response) => {
       console.log(response)
     })
+    alert("cadastrado com sucesso")
   }
 
   const handleClickButtonMateria = () => {
-    Axios.post(`${baseUrl}/cadastrarMateria`, {
-      Materia: values.Materia
+    Axios.post(`${baseUrl}/cadastro/materia`, {
+      Nome_Materia: values.Nome_Materia
     }).then((response) => {
       console.log(response)
     })
   }
 
   const handleClickButtonTurmas = () => {
-    Axios.post(`${baseUrl}/cadastrarTurmas`, {
-      Turma: values.Turma,
+    Axios.post(`${baseUrl}/cadastro/turma`, {
+      Nome_Turma: values.Nome_Turma,
       Turno: values.Turno
     }).then((response) => {
       console.log(response)
@@ -48,50 +48,55 @@ function App() {
 
   const handleClickButtonAgendar = () => {
     Axios.post(`${baseUrl}/agendar`, {
+      // Inicio: new Date(values.Inicio).toLocaleDateString(),
+      // Fim: new Date(values.Fim).toLocaleDateString(),
+      Inicio: values.Inicio,
+      Fim: values.Fim,
       Professor: values.Professor,
       Materia: values.Materia,
-      Turma: values.Turma,
-      Inicio: values.Inicio,
-      Fim: values.Fim
+      Turma: values.Turma
     }).then((response) => {
       console.log(response)
     })
+  console.log(values)
   }
+
+
 
   useEffect(() => {
     Axios.get(`${baseUrl}/professores`)
       .then((response) => {
-        setProfessores(response.data)
+        setProfessores(professores = response.data)
       })
     Axios.get(`${baseUrl}/materias`)
       .then((response) => {
-        setMaterias(response.data)
+        setMaterias(materias = response.data)
       })
     Axios.get(`${baseUrl}/turmas`)
       .then((response) => {
-        setTurmas(response.data)
+        // console.log(response.data)
+        setTurmas(turmas = response.data)
       })
     Axios.get(`${baseUrl}/horarios`)
       .then((response) => {
+        // console.log(response.data)
         setAgendamentos(response.data)
       })
   })
 
   const exibir = () => {
-    console.log(professores)
-    console.log(materias)
-    console.log(turmas)
+    // console.log(professores)
+    // console.log(materias)
+    // console.log(turmas)
     console.log(agendamentos)
+    // console.log(removeTime())
+    // removeTime()
+    // console.log(horarios)
+    console.log(agendamentos)
+    
+
   }
 
-  const exibirOcultar = () => {
-    let agendamentos = document.getElementById('agendamento')
-    if (agendamentos.style = "display:none") {
-      agendamentos.style = 'display:flex;'
-    }else if(agendamentos.style = 'display:flex;'){
-      agendamentos.style = 'display:none;'
-    }
-  }
 
   let turnoPlaceholder = "Turno"
   return (
@@ -99,6 +104,8 @@ function App() {
       <div id='containerMain'>
         <div>
           <h1>Cadastros</h1>
+          <button onClick={exibir}>exibir</button>
+          {/* <button onClick={removeTime}>Teste</button> */}
         </div>
         <div id='containerCadastros'>
           <div className='formulario'>
@@ -111,12 +118,12 @@ function App() {
           </div>
           <div className='formulario'>
             <h2>Matérias</h2>
-            <input type="text" name='Materia' id='materia' placeholder='Materia' onChange={handleChangeValues} />
+            <input type="text" name='Nome_Materia' id='materia' placeholder='Materia' onChange={handleChangeValues} />
             <button onClick={handleClickButtonMateria}>Cadastrar</button>
           </div>
           <div className='formulario'>
             <h2>Turmas</h2>
-            <input type="text" name='Turma' id='turma' placeholder='Turma' onChange={handleChangeValues} />
+            <input type="text" name='Nome_Turma' id='turma' placeholder='Turma' onChange={handleChangeValues} />
             <select name="Turno" id="turnos" onChange={handleChangeValues}>
               <option value="" defaultValue={turnoPlaceholder}>Turno</option>
               <option value="Manhã">Manhã</option>
@@ -126,40 +133,40 @@ function App() {
             <button onClick={handleClickButtonTurmas}>Cadastrar</button>
           </div>
         </div>{/*ContainerCadastro*/}
+        
+        
         <div>
-              <h1>Agendar</h1>
-              <button onClick={exibirOcultar}>Agendar</button>
+          <h1>Agendar</h1>
           <div id='agendamento' className='agendamento'>
-            <div id='tituloAgendamento'>
-              <button onClick={exibir}>exibir</button>
+            <div>
+              <div id='selects'>
+                <h2>Professor</h2>
+                <select name="Professor" id="" onChange={handleChangeValues}>
+                  <option value="">Professor</option>
+                  {professores.map((professor) => (
+                    <option value={professor.Id}>{professor.Nome}</option>
+                  ))}
+                </select>
+                {/* <label htmlFor="">Materia</label> */}
+                <h2>Matéria</h2>
+                <select name="Materia" id="" onChange={handleChangeValues}>
+                  <option>Matéria</option>
+                  {materias.map((materia) => (
+                    <option value={materia.Id}>{materia.Nome_Materia}</option>
+                  ))}
+                </select>
+                {/* <label htmlFor="">Turma</label> */}
+                <h2>Turma</h2>
+                <select name="Turma" id="" onChange={handleChangeValues}>
+                  <option>Turma</option>
+                  {turmas.map((turma) => (
+                    <option value={turma.Id}>{turma.Nome_Turma}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div id='selects'>
-              {/* <label htmlFor="">Professor</label> */}
-              <h2>Professor</h2>
-              <select name="Professor" id="" onChange={handleChangeValues}>
-                <option value="">Professor</option>
-                {professores.map((professor) => (
-                  <option value={professor.Id}>{professor.Nome}</option>
-                ))}
-              </select>
-              {/* <label htmlFor="">Materia</label> */}
-              <h2>Matéria</h2>
-              <select name="Materia" id="" onChange={handleChangeValues}>
-                <option>Matéria</option>
-                {materias.map((materia) => (
-                  <option value={materia.Id}>{materia.Materia}</option>
-                ))}
-              </select>
-              {/* <label htmlFor="">Turma</label> */}
-              <h2>Turma</h2>
-              <select name="Turma" id="" onChange={handleChangeValues}>
-                <option >Turma</option>
-                {turmas.map((turma) => (
-                  <option value={turma.Id}>{turma.Turma}</option>
-                ))}
-              </select>
-            </div>
-            <div id='containerDatas'>
+            <div>
+              <div id='containerDatas'>
                 <div>
                   {/* <label label htmlFor="">Dia</label> */}
                   <h2>Dia</h2>
@@ -168,17 +175,40 @@ function App() {
                   <div className='dateInput'>
                     {/* <label htmlFor="">Início</label> */}
                     <h2>Início</h2>
-                    <input type="date" name='Inicio' className='data' onChange={handleChangeValues} />
+                    <input type="date" name='Inicio'  className='data' id='DateInicio' onChange={handleChangeValues} />
                   </div>
                   <div className='dateInput'>
                     {/* <label htmlFor="">Fim</label> */}
                     <h2>Fim</h2>
-                    <input type="date" name='Fim' className='data' onChange={handleChangeValues} />
+                    <input type="date" name='Fim'  className='data' id='DateFim' onChange={handleChangeValues} />
                   </div>
                 </div>
               </div>
-              <button id='btnAgendar' onClick={handleClickButtonAgendar}>Agendar</button>
+            </div>
+            <button id='btnAgendar' onClick={handleClickButtonAgendar}>Agendar</button>
           </div>
+        </div>{/*containerAgendamentos*/}
+        <div className='exibir'>
+          <table>
+            <tbody>
+          <tr id='legenda'>
+            <th>Professor</th>
+            <th>Matéria</th>
+            <th>Turma</th>
+            <th>Data início</th>
+            <th>Data fim</th>
+          </tr>
+              {agendamentos.map((horario)=>(
+                <tr>
+                  <td>{horario.Nome}</td>
+                  <td>{horario.Nome_Materia}</td> 
+                  <td>{horario.Nome_Turma}</td>
+                  <td>{horario.Inicio.slice(0 ,10)}</td>
+                  <td>{horario.Fim.slice(0, 10)}</td>           
+                </tr>
+              ))} 
+              </tbody>
+          </table>
         </div>
       </div>{/*ContainerMain*/}
     </div>

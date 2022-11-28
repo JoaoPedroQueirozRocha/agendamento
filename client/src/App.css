@@ -119,14 +119,15 @@ button{
 }
 
 .agendamento{
-  display: none;
-  flex-direction: column;
-  background-color: gray;
+display: grid;
+grid-template-columns: 0.5fr 0.5fr;
+align-items: center;
+background-color: gray;
 }
 
 #agendamento select{
   padding: 4px;
-  width: 30%;
+  width: 70%;
   border-radius: 6px;
   font-size: large;
   align-self: start;
@@ -141,8 +142,9 @@ h2{
 }
 
 #btnAgendar{
-  width: 10%;
+  width: 20%;
   margin: 10px;
+
 }
 
 #containerDatas{
@@ -154,6 +156,7 @@ h2{
 
 #itensAgendar{
   display: flex;
+  flex-direction: column;
   margin: none;
   left: 0;
 }
@@ -161,4 +164,37 @@ h2{
 .dateInput{
   display: flex;
   flex-direction: column;
+}
+
+table{
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+tr{
+  border: 1px solid black;
+}
+
+td{
+  border: 1px solid black;
+  padding: 6px;
+  font-size: 1.3em;
+  /* border-radius: 6px; */
+}
+
+th{
+  font-size: 1.6em;
+  padding: 6px;
+  border: 1px solid black;
+}
+
+#legenda{
+  background-color: lightblue;
+}
+
+.exibir{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }

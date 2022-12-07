@@ -26,7 +26,7 @@ function App() {
     }).then((response) => {
       console.log(response)
     })
-    alert("cadastrado com sucesso")
+
   }
 
   const handleClickButtonMateria = () => {
@@ -35,6 +35,7 @@ function App() {
     }).then((response) => {
       console.log(response)
     })
+    alert("Enviado")
   }
 
   const handleClickButtonTurmas = () => {
@@ -44,12 +45,12 @@ function App() {
     }).then((response) => {
       console.log(response)
     })
+    alert("Enviado")
   }
 
   const handleClickButtonAgendar = () => {
     Axios.post(`${baseUrl}/agendar`, {
-      // Inicio: new Date(values.Inicio).toLocaleDateString(),
-      // Fim: new Date(values.Fim).toLocaleDateString(),
+
       Inicio: values.Inicio,
       Fim: values.Fim,
       Professor: values.Professor,
@@ -104,12 +105,9 @@ function App() {
       <div id='containerMain'>
         <div>
           <h1>Cadastros</h1>
-          <button onClick={exibir}>exibir</button>
-          {/* <button onClick={removeTime}>Teste</button> */}
         </div>
         <div id='containerCadastros'>
           <div className='formulario'>
-
             <h2>Professores</h2>
             <input type="text" name='Nome' id='Nome' placeholder='Nome' onChange={handleChangeValues} />
             <input type="text" name="Email" id="Email" placeholder='E-mail' onChange={handleChangeValues} />

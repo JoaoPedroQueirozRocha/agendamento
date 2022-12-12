@@ -40,6 +40,7 @@
 
 body{
   margin: 0;
+  background-color: #DCEBFB;
 }
 
 .App{
@@ -47,47 +48,69 @@ body{
   min-height: 100vh;
 }
 
-#containerMain{
-  min-height: 100vh;
-  min-width: fit-content;
+#containarMain{
   display: flex;
   flex-direction: column;
-  background-color: lightgray;
-  min-height: fit-content;
 }
 
-#containerCadastros{
-  display: grid;
+#cadastrosMain{
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   gap: 3%;
+}
+
+header{
   width: 100%;
-  height: fit-content;
-  background-color: lightgray;
-  margin: 0 auto;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2%;
+  height: 10vh;
+  background-color: #111031;
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
-.formulario{
+
+.titulos{
+  display: flex;
+  justify-content: center;
+}
+
+.cadastros{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: gray;
-  padding: 15px;
-  height: 20vh;
+  background-color: #1F3966;
+  height: 25vh;
+  padding: 5%;
   justify-content: space-around;
+  margin: 10%;
   border-radius: 6px;
+}
+
+.buttonsCadastro{
+  width: 55%;
+  align-self: center;
+  margin-top: 5%;
 }
 
 input{
-  width: 70%;
-  padding: 6px;
-  border-radius: 6px;
   border: none;
-  margin: 6px;
-  font-size: large;
+  background-color: transparent;
+  border-bottom: 1px solid #ffffff;
+  font-size: medium;
+  color: #DCEBFB;
 }
 
 input:focus{
   outline: none;
+}
+
+::placeholder{
+  color: rgb(207, 207, 207);
+}
+
+select{
+  width: fit-content;
 }
 
 #containerCadastros select{
@@ -100,12 +123,14 @@ input:focus{
 }
 
 button{
-  margin-top: 10px;
   padding: 6px;
   border-radius: 6px;
   border: none;
   font-size: large;
+  background-color: #90B9FA;
+  color: #ffffff;
 }
+
 
 #selects{
   display: flex;
@@ -115,31 +140,79 @@ button{
 #tituloAgendamento{
   align-self: start;
   float:left ;
+  
 
 }
 
-.agendamento{
-display: grid;
-grid-template-columns: 0.5fr 0.5fr;
-align-items: center;
-background-color: gray;
-}
-
-#agendamento select{
-  padding: 4px;
-  width: 70%;
+#agendamentosMain{
+  background-color: #1F3966;
+  display: grid;
+  grid-template-rows: 3fr 0.5fr;
+  grid-template-columns: auto;
+  width: 80%;
+  align-self: center;
+  padding: 10px;
+  align-items: center;
   border-radius: 6px;
-  font-size: large;
-  align-self: start;
 }
+
+#divDatas{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#dadosAgendamento{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.containerAgentamentos{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+#btnContainer{
+  display: flex;
+  align-items: center;
+  float: inline-end;
+}
+
+select{
+  padding: 4px;
+  font-size: medium;
+  border-radius: 6px;
+  border: none;
+  background-color: #5787e0;
+  color: #DCEBFB;
+
+}
+
+select:focus{
+  outline: transparent;
+}
+
 
 h2{
   align-self: start;
 }
 
 .data{
-  width: 80%;
+  background-color: #5787e0;
+  border-radius: 6px;
+  border: none;
+  font-size: medium;
+  width: 30%;
+  padding: 6px;
 }
+
+.titleForms{
+   color: #DCEBFB;
+}
+
+
 
 #btnAgendar{
   width: 20%;
@@ -152,6 +225,7 @@ h2{
   flex-direction: column  ;
   align-self: flex-start;
   align-items: flex-start;
+  width: fit-content;
 }
 
 #itensAgendar{
@@ -170,31 +244,45 @@ table{
   border: 1px solid black;
   border-collapse: collapse;
   margin-top: 15px;
+  align-self: center;
+  width: 60%;
+  border-radius: 6px;
 }
 
-tr{
-  border: 1px solid black;
-}
 
 td{
-  border: 1px solid black;
+  border-radius: 6px;
+
+  /* border: 1px solid black; */
   padding: 6px;
   font-size: 1.3em;
   /* border-radius: 6px; */
 }
 
+
+tr{
+border: 1px solid black;
+}
 th{
+  /* border-radius: 6px; */
   font-size: 1.6em;
   padding: 6px;
+  color: #DCEBFB;
   border: 1px solid black;
 }
 
 #legenda{
-  background-color: lightblue;
+  background-color: #1F3966;
 }
 
 .exibir{
   display: flex;
   flex-direction: column;
   align-self: center;
+}
+
+.titles{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -59,7 +59,7 @@ function App() {
     }).then((response) => {
       console.log(response)
     })
-  console.log(values)
+    console.log(values)
   }
 
 
@@ -94,33 +94,41 @@ function App() {
     // removeTime()
     // console.log(horarios)
     console.log(agendamentos)
-    
+
 
   }
 
 
   let turnoPlaceholder = "Turno"
   return (
-    <div className='App' >
-      <div id='containerMain'>
-        <div>
+    <div>
+      <header>
+        <h1>Agendamento</h1>
+      </header>
+      <div id='containerMains'>
+        <div id='titleHeader'>
           <h1>Cadastros</h1>
         </div>
-        <div id='containerCadastros'>
-          <div className='formulario'>
-            <h2>Professores</h2>
+        <div id='cadastrosMain'>
+          <div className='cadastros'>
+            <div>
+              <h2 className='titleForms'>Professor</h2>
+            </div>
             <input type="text" name='Nome' id='Nome' placeholder='Nome' onChange={handleChangeValues} />
             <input type="text" name="Email" id="Email" placeholder='E-mail' onChange={handleChangeValues} />
-            <button onClick={handleClickButton}>Cadastrar</button>
-
+            <button onClick={handleClickButton} className="buttonsCadastro">Cadastrar</button>
           </div>
-          <div className='formulario'>
-            <h2>Matérias</h2>
+          <div className='cadastros'>
+            <div>
+              <h2 className='titleForms'>Matéria</h2>
+            </div>
             <input type="text" name='Nome_Materia' id='materia' placeholder='Materia' onChange={handleChangeValues} />
-            <button onClick={handleClickButtonMateria}>Cadastrar</button>
+            <button onClick={handleClickButtonMateria} className="buttonsCadastro">Cadastrar</button>
           </div>
-          <div className='formulario'>
-            <h2>Turmas</h2>
+          <div className='cadastros'>
+            <div>
+              <h2 className='titleForms'>Turma</h2>
+            </div>
             <input type="text" name='Nome_Turma' id='turma' placeholder='Turma' onChange={handleChangeValues} />
             <select name="Turno" id="turnos" onChange={handleChangeValues}>
               <option value="" defaultValue={turnoPlaceholder}>Turno</option>
@@ -128,87 +136,100 @@ function App() {
               <option value="Tarde">Tarde</option>
               <option value="Noite">Noite</option>
             </select>
-            <button onClick={handleClickButtonTurmas}>Cadastrar</button>
+            <button onClick={handleClickButtonTurmas} className="buttonsCadastro">Cadastrar</button>
           </div>
-        </div>{/*ContainerCadastro*/}
-        
-        
-        <div>
-          <h1>Agendar</h1>
-          <div id='agendamento' className='agendamento'>
-            <div>
-              <div id='selects'>
-                <h2>Professor</h2>
-                <select name="Professor" id="" onChange={handleChangeValues}>
-                  <option value="">Professor</option>
-                  {professores.map((professor) => (
-                    <option value={professor.Id}>{professor.Nome}</option>
-                  ))}
-                </select>
-                {/* <label htmlFor="">Materia</label> */}
-                <h2>Matéria</h2>
-                <select name="Materia" id="" onChange={handleChangeValues}>
-                  <option>Matéria</option>
-                  {materias.map((materia) => (
-                    <option value={materia.Id}>{materia.Nome_Materia}</option>
-                  ))}
-                </select>
-                {/* <label htmlFor="">Turma</label> */}
-                <h2>Turma</h2>
-                <select name="Turma" id="" onChange={handleChangeValues}>
-                  <option>Turma</option>
-                  {turmas.map((turma) => (
-                    <option value={turma.Id}>{turma.Nome_Turma}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div>
-              <div id='containerDatas'>
+        </div>
+
+
+        <div className='containerAgentamentos'>
+          <div id='titleHeader'>
+            <h1>Agendar aula</h1>
+          </div>
+          <div id='agendamentosMain'>
+            {/* Inicioda div */}
+            <div id='dadosAgendamento'>
+              <div>
                 <div>
-                  {/* <label label htmlFor="">Dia</label> */}
-                  <h2>Dia</h2>
-                </div>
-                <div id='itensAgendar'>
-                  <div className='dateInput'>
-                    {/* <label htmlFor="">Início</label> */}
-                    <h2>Início</h2>
-                    <input type="date" name='Inicio'  className='data' id='DateInicio' onChange={handleChangeValues} />
+                  <div>
+                    <h2 className='titleForms'>Professor</h2>
+                    <select name="Professor" id="" onChange={handleChangeValues}>
+                      <option value="">Professor</option>
+                      {professores.map((professor) => (
+                        <option value={professor.Id}>{professor.Nome}</option>
+                      ))}
+                    </select>
                   </div>
-                  <div className='dateInput'>
-                    {/* <label htmlFor="">Fim</label> */}
-                    <h2>Fim</h2>
-                    <input type="date" name='Fim'  className='data' id='DateFim' onChange={handleChangeValues} />
+                  <div>
+                    <h2 className='titleForms'>Matéria</h2>
+                    <select name="Materia" id="" onChange={handleChangeValues}>
+                      <option>Matéria</option>
+                      {materias.map((materia) => (
+                        <option value={materia.Id}>{materia.Nome_Materia}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <h2 className='titleForms'>Turma</h2>
+                    <select name="Turma" id="" onChange={handleChangeValues}>
+                      <option>Turma</option>
+                      {turmas.map((turma) => (
+                        <option value={turma.Id}>{turma.Nome_Turma}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* final da div */}
+
+              <div id='divDatas'>
+                <div>
+                  <div>
+                    <h2 className='titleForms'>Início das aulas</h2>
+                    <input type="date" name='Inicio' className='data' id='DateInicio' onChange={handleChangeValues} />
+                  </div>
+                  <div>
+                    <h2 className='titleForms'>Fim das aulas</h2>
+                    <input type="date" name='Fim' className='data' id='DateFim' onChange={handleChangeValues} />
                   </div>
                 </div>
               </div>
             </div>
-            <button id='btnAgendar' onClick={handleClickButtonAgendar}>Agendar</button>
+            {/* div dos dados */}
+            <div>
+              <div>
+                <button>Agendar</button>
+              </div>
+            </div>
           </div>
+
+
+
+
         </div>{/*containerAgendamentos*/}
         <div className='exibir'>
           <table>
             <tbody>
-          <tr id='legenda'>
-            <th>Professor</th>
-            <th>Matéria</th>
-            <th>Turma</th>
-            <th>Data início</th>
-            <th>Data fim</th>
-          </tr>
-              {agendamentos.map((horario)=>(
+              <tr id='legenda'>
+                <th>Professor</th>
+                <th>Matéria</th>
+                <th>Turma</th>
+                <th>Data início</th>
+                <th>Data fim</th>
+              </tr>
+              {agendamentos.map((horario) => (
                 <tr>
                   <td>{horario.Nome}</td>
-                  <td>{horario.Nome_Materia}</td> 
+                  <td>{horario.Nome_Materia}</td>
                   <td>{horario.Nome_Turma}</td>
-                  <td>{horario.Inicio.slice(0 ,10)}</td>
-                  <td>{horario.Fim.slice(0, 10)}</td>           
+                  <td>{horario.Inicio.slice(0, 10)}</td>
+                  <td>{horario.Fim.slice(0, 10)}</td>
                 </tr>
-              ))} 
-              </tbody>
+              ))}
+            </tbody>
           </table>
         </div>
-      </div>{/*ContainerMain*/}
+      </div>
     </div>
   )
 }
